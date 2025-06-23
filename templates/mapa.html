@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mapa Interactivo - Antisana</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    nav {
+      background-color: #003366;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    nav .brand {
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    nav .menu a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav .menu a:hover {
+      color: #ffcc00;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 70px);
+    }
+
+    .sidebar {
+      width: 30%;
+      background-color: #f4f6f9;
+      overflow-y: auto;
+      padding: 1rem;
+      border-right: 1px solid #ddd;
+    }
+
+    .sidebar h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .sensor {
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: white;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .sensor strong {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    #map {
+      flex: 1;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+      }
+
+      #map {
+        height: 60vh;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav .menu {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navegación -->
+  <nav>
+    <div class="brand">🌐 Proyecto Antisana</div>
+    <div class="menu">
+      <a href="/">🏠 Inicio</a>
+      <a href="/mapa">🗺️ Mapa</a>
+      <a href="/analisis">📉 Análisis</a>
+      <a href="/solucion">💡 Solución</a>
+      <a href="/visualizacion">📊 Visualización</a>
+    </div>
+  </nav>
+
+  <!-- Contenido principal -->
+  <div class="container">
+    <div class="sidebar">
+      <h2>Estaciones del Antisana</h2>
+      {% for sensor in sensores %}
+      <div class="sensor" data-lat="{{ sensor.latitud }}" data-lon="{{ sensor.longitud }}" data-codigo="{{ sensor.codigo }}">
+        <strong>{{ sensor.codigo }} - {{ sensor.nombre }}</strong>
+        <span>Tipo: {{ sensor.tipo }}</span><br>
+        <span>Variable: {{ sensor.variable }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    <div id="map"></div>
+  </div>
+
+  <!-- Leaflet -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([-0.5, -78.2], 9);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const sensores = {{ sensores|tojson }};
+    const markerMap = {};
+
+    sensores.forEach(sensor => {
+      const iconColor = sensor.variable === 'Precipitación' ? 'purple' :
+                        sensor.variable === 'Caudal' ? 'blue' :
+                        sensor.variable === 'Nivel de agua' ? 'green' : 'orange';
+
+      const icon = L.divIcon({
+        html: `<div style='background:${iconColor};width:14px;height:14px;border-radius:50%;'></div>`
+      });
+
+      const marker = L.marker([sensor.latitud, sensor.longitud], { icon: icon })
+        .addTo(map)
+        .bindPopup(`<strong>${sensor.nombre}</strong><br>Tipo: ${sensor.tipo}<br>Variable: ${sensor.variable}`);
+
+      markerMap[sensor.codigo] = marker;
+    });
+
+    document.querySelectorAll('.sensor').forEach(item => {
+      item.addEventListener('click', () => {
+        const lat = parseFloat(item.getAttribute('data-lat'));
+        const lon = parseFloat(item.getAttribute('data-lon'));
+        const codigo = item.getAttribute('data-codigo');
+
+        if (markerMap[codigo]) {
+          map.setView([lat, lon], 13);
+          markerMap[codigo].openPopup();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

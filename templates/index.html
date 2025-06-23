@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Proyecto Antisana - Visualización de Sensores</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            min-height: 100vh;
+        }
+
+        .left-panel, .right-panel {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .left-panel {
+            background: linear-gradient(135deg, #003366, #005cbf);
+            color: #ffffff;
+            align-items: center;
+            text-align: center;
+        }
+
+        .left-panel img {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        .left-panel h1, .left-panel h2 {
+            margin-bottom: 10px;
+        }
+
+        .left-panel ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .left-panel li {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .right-panel {
+            background-color: #ffffff;
+            align-items: flex-start;
+        }
+
+        .right-panel h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .right-panel p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 700px;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            background-color: #007BFF;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+            font-weight: bold;
+            text-align: center;
+            width: fit-content;
+        }
+
+        .menu a:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .right-panel, .left-panel {
+                align-items: center;
+                text-align: center;
+            }
+
+            .menu {
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Panel izquierdo -->
+        <div class="left-panel">
+            <img src="{{ url_for('static', filename='logoUce.png') }}" alt="Logo UCE">
+            <h1>Universidad Central del Ecuador</h1>
+            <h2>Facultad de Ingeniería y Ciencias Aplicadas</h2>
+            <h2>Escuela de Sistemas de Información</h2>
+            <br>
+            <p><strong>Integrantes:</strong></p>
+            <ul>
+                <li>Sebastián Pérez</li>
+                <li>Julián Pulupa</li>
+                <li>Alexandra Vaca</li>
+                <li>Fernando Yaguana</li>
+            </ul>
+        </div>
+
+        <!-- Panel derecho -->
+        <div class="right-panel">
+            <h1>Visualización y Análisis de Datos Hidrometeorológicos del Antisana</h1>
+            <p>
+                Este sistema permite explorar las estaciones de monitoreo instaladas en el Antisana, identificar brechas
+                en los datos (precipitación, caudal, nivel de agua, caudal de aforo) y proponer soluciones tecnológicas
+                para mejorar la gestión del recurso hídrico mediante predicción, visualización y análisis.
+            </p>
+            <div class="menu">
+                <a href="/mapa">🗺️ Mapa Interactivo</a>
+                <a href="/analisis">📉 Análisis de Problemas</a>
+                <a href="/solucion">💡 Propuesta de Solución</a>
+                <a href="/visualizacion">📊 Visualización de Datos</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

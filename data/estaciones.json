@@ -1,0 +1,114 @@
+[
+  {
+    "codigo": "P42",
+    "nombre": "Antisana Ramón Huañuna",
+    "tipo": "Pluviométrica",
+    "latitud": -0.6022867145410288,
+    "longitud": -78.1986689291808,
+    "variable": "Precipitación"
+  },
+  {
+    "codigo": "P43",
+    "nombre": "Antisana Limboasi",
+    "tipo": "Pluviométrica",
+    "latitud": -0.5934839659614135,
+    "longitud": -78.20825370752031,
+    "variable": "Precipitación"
+  },
+  {
+    "codigo": "P55",
+    "nombre": "Antisana Diguchi",
+    "tipo": "Pluviométrica",
+    "latitud": -0.5731364867736277,
+    "longitud": -78.262844542214,
+    "variable": "Precipitación"
+  },
+  {
+    "codigo": "H16",
+    "nombre": "Antisana Diguchi",
+    "tipo": "Hidrométrica",
+    "latitud": -0.568030320820445,
+    "longitud": -78.23003654301957,
+    "variable": "Caudal"
+  },
+  {
+    "codigo": "H44",
+    "nombre": "Antisana DJ Diguchi",
+    "tipo": "Hidrométrica",
+    "latitud": -0.5683880379564397,
+    "longitud": -78.2298390801277,
+    "variable": "Caudal"
+  },
+  {
+    "codigo": "H55",
+    "nombre": "Río Antisana AC",
+    "tipo": "Hidrométrica",
+    "latitud": -0.5367672976823137,
+    "longitud": -78.22695270391573,
+    "variable": "Caudal"
+  },
+  {
+    "codigo": "H16",
+    "nombre": "Antisana Diguchi",
+    "tipo": "Hidrométrica",
+    "latitud": -0.568030320820445,
+    "longitud": -78.23003654301957,
+    "variable": "Nivel de agua"
+  },
+  {
+    "codigo": "H44",
+    "nombre": "Antisana DJ Diguchi",
+    "tipo": "Hidrométrica",
+    "latitud": -0.5683880379564397,
+    "longitud": -78.2298390801277,
+    "variable": "Nivel de agua"
+  },
+  {
+    "codigo": "H55",
+    "nombre": "Río Antisana AC",
+    "tipo": "Hidrométrica",
+    "latitud": -0.5367672976823137,
+    "longitud": -78.22695270391573,
+    "variable": "Nivel de agua"
+  },
+  {
+    "codigo": "MS01",
+    "nombre": "Río Antisana DJ Diguchi",
+    "tipo": "Aforo",
+    "latitud": -0.5683880379564397,
+    "longitud": -78.2298390801277,
+    "variable": "Caudal de aforo"
+  },
+  {
+    "codigo": "MS02",
+    "nombre": "Río Antisana AJ Micahuayco",
+    "tipo": "Aforo",
+    "latitud": -0.5359084577074922,
+    "longitud": -78.22719656024854,
+    "variable": "Caudal de aforo"
+  },
+  {
+    "codigo": "MS03",
+    "nombre": "Río Antisana DJ Diguchi",
+    "tipo": "Aforo",
+    "latitud": -0.535916935824154,
+    "longitud": -78.22661168361923,
+    "variable": "Caudal de aforo"
+  },
+  {
+    "codigo": "MS06",
+    "nombre": "Río Antisana antes Captación",
+    "tipo": "Aforo",
+    "latitud": -0.5369345016530646,
+    "longitud": -78.22721242186383,
+    "variable": "Caudal de aforo"
+  },
+  {
+    "codigo": "MS21",
+    "nombre": "Río Antisana Estación Humboldt",
+    "tipo": "Aforo",
+    "latitud": -0.5132368212007032,
+    "longitud": -78.21328018746179,
+    "variable": "Caudal de aforo"
+  }
+]
