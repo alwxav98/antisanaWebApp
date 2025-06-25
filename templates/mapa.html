@@ -159,7 +159,19 @@
 
       const marker = L.marker([sensor.latitud, sensor.longitud], { icon: icon })
         .addTo(map)
-        .bindPopup(`<strong>${sensor.nombre}</strong><br>Tipo: ${sensor.tipo}<br>Variable: ${sensor.variable}`);
+        .bindPopup(`
+          <strong>${sensor.nombre}</strong><br>
+          <b>Tipo:</b> ${sensor.tipo}<br>
+          <b>Variable:</b> ${sensor.variable}<br><br>
+          <b>Reserva:</b> ${sensor.reserva || 'No especificada'}<br>
+          <b>Fuente hídrica:</b> ${sensor.fuente_hidrica || 'No especificada'}<br>
+          <b>Ecosistema:</b> ${sensor.ecosistema || 'No especificado'}<br><br>
+          <b>Influencia:</b><br>
+          <span style="font-size: 13px;">${sensor.influencia || 'Sin descripción detallada.'}</span><br><br>
+          <b>Contexto:</b><br>
+          <span style="font-size: 13px;">${sensor.contexto_geoambiental || 'Sin información adicional.'}</span>
+        `);
+
 
       markerMap[sensor.codigo] = marker;
     });
@@ -177,5 +189,20 @@
       });
     });
   </script>
+
+  <script>
+    fetch('/api/zona_sensores')
+      .then(res => res.json())
+      .then(data => {
+        L.geoJSON(data, {
+          style: {
+            color: 'red',
+            fillColor: '#ffcccc',
+            fillOpacity: 0.3
+          }
+        }).addTo(map).bindPopup(data.properties.nombre);
+      });
+  </script>
+
 </body>
 </html>
