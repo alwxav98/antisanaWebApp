@@ -5,7 +5,12 @@
     "tipo": "Pluviométrica",
     "latitud": -0.6022867145410288,
     "longitud": -78.1986689291808,
-    "variable": "Precipitación"
+    "variable": "Precipitación",
+    "contexto_geoambiental": "n",
+    "reserva": "n",
+    "fuente_hidrica": "n",
+    "ecosistema": "n",
+    "influencia": "n"
   },
   {
     "codigo": "P43",
@@ -13,7 +18,12 @@
     "tipo": "Pluviométrica",
     "latitud": -0.5934839659614135,
     "longitud": -78.20825370752031,
-    "variable": "Precipitación"
+    "variable": "Precipitación",
+    "contexto_geoambiental": "n",
+    "reserva": "n",
+    "fuente_hidrica": "n",
+    "ecosistema": "n",
+    "influencia": "n"
   },
   {
     "codigo": "P55",
@@ -21,7 +31,12 @@
     "tipo": "Pluviométrica",
     "latitud": -0.5731364867736277,
     "longitud": -78.262844542214,
-    "variable": "Precipitación"
+    "variable": "Precipitación",
+    "contexto_geoambiental": "n",
+    "reserva": "n",
+    "fuente_hidrica": "n",
+    "ecosistema": "n",
+    "influencia": "n"
   },
   {
     "codigo": "H16",
@@ -29,7 +44,12 @@
     "tipo": "Hidrométrica",
     "latitud": -0.568030320820445,
     "longitud": -78.23003654301957,
-    "variable": "Caudal"
+    "variable": "Caudal",
+    "contexto_geoambiental": "n",
+    "reserva": "n",
+    "fuente_hidrica": "n",
+    "ecosistema": "n",
+    "influencia": "n"
   },
   {
     "codigo": "H44",
@@ -37,7 +57,12 @@
     "tipo": "Hidrométrica",
     "latitud": -0.5683880379564397,
     "longitud": -78.2298390801277,
-    "variable": "Caudal"
+    "variable": "Caudal",
+    "contexto_geoambiental": "n",
+    "reserva": "n",
+    "fuente_hidrica": "n",
+    "ecosistema": "n",
+    "influencia": "n"
   },
   {
     "codigo": "H55",
@@ -45,7 +70,12 @@
     "tipo": "Hidrométrica",
     "latitud": -0.5367672976823137,
     "longitud": -78.22695270391573,
-    "variable": "Caudal"
+    "variable": "Caudal",
+    "contexto_geoambiental": "n",
+    "reserva": "n",
+    "fuente_hidrica": "n",
+    "ecosistema": "n",
+    "influencia": "n"
   },
   {
     "codigo": "H16",
@@ -53,7 +83,12 @@
     "tipo": "Hidrométrica",
     "latitud": -0.568030320820445,
     "longitud": -78.23003654301957,
-    "variable": "Nivel de agua"
+    "variable": "Nivel de agua",
+    "contexto_geoambiental": "n",
+    "reserva": "n",
+    "fuente_hidrica": "n",
+    "ecosistema": "n",
+    "influencia": "n"
   },
   {
     "codigo": "H44",
@@ -61,7 +96,12 @@
     "tipo": "Hidrométrica",
     "latitud": -0.5683880379564397,
     "longitud": -78.2298390801277,
-    "variable": "Nivel de agua"
+    "variable": "Nivel de agua",
+    "contexto_geoambiental": "n",
+    "reserva": "n",
+    "fuente_hidrica": "n",
+    "ecosistema": "n",
+    "influencia": "n"
   },
   {
     "codigo": "H55",
@@ -69,7 +109,12 @@
     "tipo": "Hidrométrica",
     "latitud": -0.5367672976823137,
     "longitud": -78.22695270391573,
-    "variable": "Nivel de agua"
+    "variable": "Nivel de agua",
+    "contexto_geoambiental": "n",
+    "reserva": "n",
+    "fuente_hidrica": "n",
+    "ecosistema": "n",
+    "influencia": "n"
   },
   {
     "codigo": "MS01",
@@ -77,7 +122,12 @@
     "tipo": "Aforo",
     "latitud": -0.5683880379564397,
     "longitud": -78.2298390801277,
-    "variable": "Caudal de aforo"
+    "variable": "Caudal de aforo",
+    "contexto_geoambiental": "n",
+    "reserva": "n",
+    "fuente_hidrica": "n",
+    "ecosistema": "n",
+    "influencia": "n"
   },
   {
     "codigo": "MS02",
@@ -131,5 +181,4 @@
     "ecosistema": "Zona húmeda montana",
     "influencia": "La orografía montañosa y la cobertura vegetal densa generan escorrentía estable y alta infiltración"
   }
-]
 ]
