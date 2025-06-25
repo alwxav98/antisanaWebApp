@@ -85,15 +85,25 @@
     "tipo": "Aforo",
     "latitud": -0.5359084577074922,
     "longitud": -78.22719656024854,
-    "variable": "Caudal de aforo"
+    "variable": "Caudal de aforo",
+    "contexto_geoambiental": "Ubicada en el Parque Nacional Antisana, aguas abajo de zonas de recarga hídrica. Es un área con ecosistemas altoandinos sensibles a la variabilidad climática.",
+    "reserva": "Parque Nacional Antisana",
+    "fuente_hidrica": "Río Micahuayco",
+    "ecosistema": "Páramo húmedo altoandino",
+    "influencia": "La altitud y la vegetación del páramo influyen en la regulación del caudal; lluvias frecuentes y escorrentía superficial afectan la medición"
   },
   {
     "codigo": "MS03",
-    "nombre": "Río Antisana DJ Diguchi",
+    "nombre": "Río Micahuayco AJ Antisana",
     "tipo": "Aforo",
     "latitud": -0.535916935824154,
     "longitud": -78.22661168361923,
-    "variable": "Caudal de aforo"
+    "variable": "Caudal de aforo",
+    "contexto_geoambiental": "Localizada en la zona de transición entre el páramo y las nacientes del río Antisana, esta estación mide el aporte hídrico clave para el sistema Mica-Quito.",
+    "reserva": "Parque Nacional Antisana",
+    "fuente_hidrica": "Río Micahuayco",
+    "ecosistema": "Páramo húmedo",
+    "influencia": "Altas precipitaciones y suelos orgánicos con capacidad de retención modifican el flujo hacia la estación"
   },
   {
     "codigo": "MS06",
@@ -101,7 +111,12 @@
     "tipo": "Aforo",
     "latitud": -0.5369345016530646,
     "longitud": -78.22721242186383,
-    "variable": "Caudal de aforo"
+    "variable": "Caudal de aforo",
+    "contexto_geoambiental": "Ubicada aguas arriba del punto de captación del sistema Mica, en una zona clave para evaluar el impacto de la lluvia sobre el caudal disponible.",
+    "reserva": "Parque Nacional Antisana",
+    "fuente_hidrica": "Río Antisana",
+    "ecosistema": "Páramo húmedo altoandino",
+    "influencia": "El clima frío y húmedo de páramo, junto con la cobertura vegetal natural, regula el escurrimiento y la estabilidad del caudal"
   },
   {
     "codigo": "MS21",
@@ -109,6 +124,12 @@
     "tipo": "Aforo",
     "latitud": -0.5132368212007032,
     "longitud": -78.21328018746179,
-    "variable": "Caudal de aforo"
+    "variable": "Caudal de aforo",
+    "contexto_geoambiental": "Estación ubicada en la parte alta de la vertiente oriental del Antisana, donde se recibe aporte de escorrentía superficial y subsuperficial.",
+    "reserva": "Parque Nacional Antisana",
+    "fuente_hidrica": "Río Antisana",
+    "ecosistema": "Zona húmeda montana",
+    "influencia": "La orografía montañosa y la cobertura vegetal densa generan escorrentía estable y alta infiltración"
   }
+]
 ]
