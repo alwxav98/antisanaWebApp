@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Visualización Precipitación - Antisana</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background-color: #f9f9f9; color: #333; }
+    nav { background-color: #003366; color: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+    nav .menu a { color: white; text-decoration: none; margin-left: 20px; font-weight: 500; transition: color 0.2s; }
+    nav .menu a:hover { color: #ffcc00; }
+    .container { max-width: 1000px; margin: 40px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    h1 { color: #005cbf; margin-bottom: 20px; }
+    p { font-size: 16px; line-height: 1.8; margin-bottom: 20px; }
+    select { padding: 8px; margin-bottom: 20px; }
+    canvas { margin: 30px 0; }
+    @media (max-width: 768px) {
+      nav { flex-direction: column; align-items: flex-start; }
+      nav .menu { margin-top: 0.5rem; }
+      .container { margin: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="brand">🌐 Proyecto Antisana</div>
+    <div class="menu">
+      <a href="/">🏠 Inicio</a>
+      <a href="/analisis">📉 Análisis</a>
+      <a href="/mapa">🗺️ Mapa</a>
+      <a href="/solucion">💡 Solución</a>
+      <a href="/visualizacion">📊 Visualización</a>
+      <a href="/dashboard">📌 Dashboard</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>📊 Visualización de Precipitación por Sensor</h1>
+
+    <p>
+      En esta sección puedes observar cómo varía la precipitación captada por los sensores del Antisana a lo largo del tiempo.
+      Esto permite identificar fechas donde no se registraron datos o cuándo ocurrieron lluvias intensas, información esencial
+      para entender el ciclo del agua en la región y planificar la gestión del recurso hídrico.
+    </p>
+
+    <label for="sensorSelect"><strong>Selecciona un sensor:</strong></label>
+    <select id="sensorSelect">
+      <option value="P42">P42 - Ramón Huañuna</option>
+      <option value="P43">P43 - Limboasi</option>
+      <option value="P55">P55 - Diguchi</option>
+    </select>
+
+    <canvas id="lineChart"></canvas>
+    <p id="noDataMessage" style="display:none; color:#c00; font-weight:600;">
+      🚫 No hay datos para este sensor.
+    </p>
+  </div>
+
+  <script>
+    const dataAll = {{ data | safe }};
+    const ctx = document.getElementById('lineChart').getContext('2d');
+    const noDataMsg = document.getElementById('noDataMessage');
+    let chart;
+
+    function updateChart(sensorKey) {
+      const data = dataAll[sensorKey];
+      if (!data || data.length === 0) {
+        if (chart) chart.destroy();
+        noDataMsg.style.display = 'block';
+        return;
+      }
+
+      noDataMsg.style.display = 'none';
+      const labels = data.map(d => d.fecha.slice(0,10));
+      const valores = data.map(d => d.valor);
+
+      if(chart) chart.destroy();
+      chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: `Precipitación (${sensorKey})`,
+            data: valores,
+            fill: false,
+            borderColor: '#007BFF',
+            tension: 0.1,
+            pointRadius: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: true }
+          },
+          scales: {
+            y: { beginAtZero: true },
+            x: { ticks: { autoSkip: true, maxTicksLimit: 20 }}
+          }
+        }
+      });
+    }
+
+    // Inicializa con P42
+    updateChart('P42');
+
+    document.getElementById('sensorSelect').addEventListener('change', function() {
+      updateChart(this.value);
+    });
+  </script>
+</body>
+</html>
