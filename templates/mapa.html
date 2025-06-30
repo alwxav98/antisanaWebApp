@@ -114,10 +114,11 @@
     <div class="brand">🌐 Proyecto Antisana</div>
     <div class="menu">
       <a href="/">🏠 Inicio</a>
-      <a href="/mapa">🗺️ Mapa</a>
       <a href="/analisis">📉 Análisis</a>
+      <a href="/mapa">🗺️ Mapa</a>
       <a href="/solucion">💡 Solución</a>
       <a href="/visualizacion">📊 Visualización</a>
+      <a href="/dashboard">📌 Dashboard</a>
     </div>
   </nav>
 
@@ -203,6 +204,166 @@
         }).addTo(map).bindPopup(data.properties.nombre);
       });
   </script>
+
+  <script>
+    // Función sencilla para calcular distancia aproximada (en km) usando el Teorema de Pitágoras local
+    function distanciaLatLonKm(lat1, lon1, lat2, lon2) {
+      const R = 6371; // Radio de la Tierra en km
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a =
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon/2) * Math.sin(dLon/2);
+      return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
+    }
+
+    // Calcula sensores cercanos a un punto dado en un radio (km)
+    function sensoresCercanos(lat, lon, radio) {
+      return sensores.filter(s =>
+        distanciaLatLonKm(lat, lon, s.latitud, s.longitud) <= radio
+      );
+    }
+
+    // -------------------------
+    // Reserva Ecológica Antisana
+    // -------------------------
+    let sensoresReserva = sensoresCercanos(-0.55, -78.25, 7);
+    let listaReserva = sensoresReserva.length > 0 ?
+      sensoresReserva.map(s => `${s.codigo} (${s.variable})`).join("<br>") :
+      "Ningún sensor cercano";
+
+    L.circle([-0.55, -78.25], {
+      color: 'green',
+      fillColor: '#7CFC00',
+      fillOpacity: 0.3,
+      radius: 7000
+    }).addTo(map)
+      .bindPopup(`
+        <strong>Reserva Ecológica Antisana</strong><br>
+        - Zona protegida que regula microclima y recarga hídrica.<br>
+        <u>Sensores próximos:</u><br>${listaReserva}
+      `);
+
+    // -------------------------
+    // Laguna La Mica
+    // -------------------------
+    let sensoresMica = sensoresCercanos(-0.60, -78.20, 2);
+    let listaMica = sensoresMica.length > 0 ?
+      sensoresMica.map(s => `${s.codigo} (${s.variable})`).join("<br>") :
+      "Ningún sensor cercano";
+
+    L.circle([-0.60, -78.20], {
+      color: 'blue',
+      fillColor: '#ADD8E6',
+      fillOpacity: 0.4,
+      radius: 1500
+    }).addTo(map)
+      .bindPopup(`
+        <strong>Laguna La Mica</strong><br>
+        - Aporta humedad local.<br>
+        <u>Sensores próximos:</u><br>${listaMica}
+      `);
+
+    // -------------------------
+    // Río Antisana
+    // -------------------------
+    let sensoresRio = sensoresCercanos(-0.54, -78.22, 3);
+    let listaRio = sensoresRio.length > 0 ?
+      sensoresRio.map(s => `${s.codigo} (${s.variable})`).join("<br>") :
+      "Ningún sensor cercano";
+
+    L.circle([-0.54, -78.22], {
+      color: '#00BFFF',
+      fillColor: '#87CEFA',
+      fillOpacity: 0.4,
+      radius: 3000
+    }).addTo(map)
+      .bindPopup(`
+        <strong>Río Antisana</strong><br>
+        - Recibe escorrentía desde páramos.<br>
+        <u>Sensores próximos:</u><br>${listaRio}
+      `);
+  </script>
+
+
+  <script>
+    // -------------------------
+    // MARCADORES simples con información breve
+    // -------------------------
+    L.marker([-0.55, -78.25])
+      .addTo(map)
+      .bindPopup("<strong>Reserva Ecológica Antisana</strong><br>Zona protegida que regula el clima local.");
+
+    L.marker([-0.60, -78.20])
+      .addTo(map)
+      .bindPopup("<strong>Laguna La Mica</strong><br>Influye en la humedad y microclima del Antisana.");
+
+    L.marker([-0.54, -78.22])
+      .addTo(map)
+      .bindPopup("<strong>Río Antisana</strong><br>Recibe escorrentía desde páramos y glaciares.");
+
+    // -------------------------
+    // CÍRCULOS con información extendida para resaltar influencia ambiental
+    // -------------------------
+    L.circle([-0.55, -78.25], {
+      color: 'green',
+      fillColor: '#7CFC00',
+      fillOpacity: 0.3,
+      radius: 7000
+    }).addTo(map)
+      .bindPopup(`
+        <strong>Reserva Ecológica Antisana</strong><br>
+        - Zona protegida que conserva páramos, bosques montanos y ecosistemas altoandinos.<br>
+        - Regula el microclima local y provee la principal recarga hídrica.<br>
+        - Fundamental para los modelos de escorrentía y abastecimiento de Quito.
+      `);
+
+    L.circle([-0.60, -78.20], {
+      color: 'blue',
+      fillColor: '#ADD8E6',
+      fillOpacity: 0.4,
+      radius: 1500
+    }).addTo(map)
+      .bindPopup(`
+        <strong>Laguna La Mica</strong><br>
+        - Regula humedad relativa y microclimas alrededor de los sensores pluviométricos.<br>
+        - Sus variaciones influyen en series temporales de precipitación.
+      `);
+
+    L.circle([-0.54, -78.22], {
+      color: '#00BFFF',
+      fillColor: '#87CEFA',
+      fillOpacity: 0.4,
+      radius: 3000
+    }).addTo(map)
+      .bindPopup(`
+        <strong>Río Antisana</strong><br>
+        - Recibe escorrentía directa desde el glaciar y los páramos.<br>
+        - Es base para calibrar modelos de caudal y predicción de disponibilidad hídrica.
+      `);
+
+    // -------------------------
+    // TOOLTIPs permanentes para identificar en el mapa
+    // -------------------------
+    L.tooltip({ permanent: true, direction: 'right' })
+      .setLatLng([-0.55, -78.25])
+      .setContent("Reserva Ecológica Antisana")
+      .addTo(map);
+
+    L.tooltip({ permanent: true, direction: 'left' })
+      .setLatLng([-0.60, -78.20])
+      .setContent("Laguna La Mica")
+      .addTo(map);
+
+    L.tooltip({ permanent: true, direction: 'bottom' })
+      .setLatLng([-0.54, -78.22])
+      .setContent("Río Antisana")
+      .addTo(map);
+  </script>
+
+
+
 
 </body>
 </html>
