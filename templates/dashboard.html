@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard Sensores - Antisana</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    nav {
+      background-color: #003366;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+    nav .menu a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav .menu a:hover {
+      color: #ffcc00;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    h1 { color: #005cbf; margin-bottom: 20px; }
+    p { font-size: 16px; line-height: 1.8; margin-bottom: 20px; }
+    canvas { margin: 20px 0; }
+    @media (max-width: 768px) {
+      nav { flex-direction: column; align-items: flex-start; }
+      nav .menu { margin-top: 0.5rem; }
+      .container { margin: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="brand">🌐 Proyecto Antisana</div>
+    <div class="menu">
+      <a href="/">🏠 Inicio</a>
+      <a href="/analisis">📉 Análisis</a>
+      <a href="/mapa">🗺️ Mapa</a>
+      <a href="/solucion">💡 Solución</a>
+      <a href="/visualizacion">📊 Visualización</a>
+      <a href="/dashboard">📌 Dashboard</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>📌 Dashboard de Sensores por Zona Natural</h1>
+
+    <p>
+        Este dashboard muestra cómo se distribuyen los sensores en relación con tres zonas naturales clave del Antisana:
+        la <strong>Reserva Ecológica Antisana</strong>, la <strong>Laguna La Mica</strong> y el <strong>Río Antisana</strong>.
+    </p>
+
+    <p>
+        Estas zonas tienen un papel muy importante en los datos que captan los sensores, porque el entorno donde está
+        ubicado cada sensor influye directamente en las mediciones:
+    </p>
+
+    <ul>
+        <li>
+            📍 <strong>Reserva Ecológica Antisana:</strong> Al ser un área protegida con páramos y bosques montanos,
+            regula el clima local manteniendo temperaturas bajas y alta humedad. Esto ayuda a que se conserve el agua
+            en el suelo y se alimenten los acuíferos. Los sensores en esta zona captan cómo el ecosistema controla
+            la cantidad de agua disponible y cómo se recarga la cuenca.
+        </li>
+        <li>
+            💧 <strong>Laguna La Mica:</strong> Es un espejo de agua que aporta humedad al ambiente circundante,
+            afectando directamente las mediciones de precipitación y temperatura que registran los sensores cercanos.
+            Además, actúa como un reservorio natural que estabiliza el clima local.
+        </li>
+        <li>
+            🌊 <strong>Río Antisana:</strong> Recoge el agua que proviene de las lluvias, del deshielo y del escurrimiento
+            superficial del páramo. Los sensores que miden el nivel y el caudal del río son clave para saber si hay suficiente
+            agua para abastecer a las poblaciones y para anticipar posibles crecidas o sequías.
+        </li>
+    </ul>
+
+    <p>
+    Con esta visualización se puede entender mejor cómo estos ecosistemas están conectados con los sensores,
+    ayudando a interpretar los datos y a construir modelos que predigan el comportamiento del agua en toda la región.
+    </p>
+
+
+    <!-- Gráfico de barras -->
+    <canvas id="barChart" width="400" height="200"></canvas>
+  </div>
+
+  <script>
+    const zonas = {{ zonas | tojson }};
+    const labels = Object.keys(zonas);
+    const counts = labels.map(z => zonas[z].length);
+
+    new Chart(document.getElementById('barChart'), {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Cantidad de Sensores',
+          data: counts,
+          backgroundColor: ['#7CFC00', '#1E90FF', '#87CEFA'],
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: { beginAtZero: true, stepSize: 1 }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
